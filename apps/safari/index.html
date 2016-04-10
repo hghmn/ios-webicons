@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Safari - Webicon</title>
+  <meta name="description" content="Webapp deeplink for Safari on ios">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- these could make it look nicer, but we don't need that -->
+  <!--
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  -->
+
+  <link rel="apple-touch-icon-precomposed" href="touch-icon-iphone.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="touch-icon-ipad.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="touch-icon-ipad-retina.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="touch-icon-iphone-6.png">
+  
+  <!-- if we needed startup images -->
+  <!--
+    <link rel="apple-touch-startup-image" href="app/startup.png">
+    <link rel="apple-touch-startup-image" href="app/startup_6.png" media="(device-width: 375px)">
+  -->
+</head>
+<body>
+  <h1>Link to Safari</h1>
+  <button onclick="setup()">Click button to launch Safari next time.</button>
+  
+  <script type="text/javascript">
+    // set this to the homepage you'd like to load each time
+    var homepage = "https://duckduckgo.com/";
+    
+    function setup() {
+      localStorage.setItem("ready", "true");
+      location.href = homepage;
+    }
+
+    if (localStorage.getItem("ready") === "true") {
+      location.href = homepage;
+    }
+  </script>
+</body>
+</html>

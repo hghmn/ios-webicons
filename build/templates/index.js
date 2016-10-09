@@ -14,7 +14,8 @@ module.exports = opts => `\
     <meta name="description" content="${ opts.description }">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- webapp icon links added here at runtime -->
+    <!-- add default styles -->
+    ${ templateStyles(opts.styles) }
 </head>
 <body>
 <!-- app name and image -->
@@ -34,4 +35,10 @@ function appsList(apps, baseDir) {
             return `<li><a href="${ path.join('/') }">${ appName }</a></li>`
         })
         .join('');
+}
+
+function templateStyles(styles) {
+    return (styles || [])
+        .map(styleText => `<style type="text/css">${ styleText }</style>`)
+        .join('\n');
 }

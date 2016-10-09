@@ -59,19 +59,23 @@ fs.stat(dest)
             .then(resolved => resolved.map((app, ix) => filenames[ix]));
     })
     .then(renderedApps => {
-        // write out
-        fs.writeFile(path.join(rootDir, 'index.html'), indexTemplate({
+        let props = extendTemplateProps({
             title: 'index',
             description: 'App List',
             apps: renderedApps,
             baseDir: 'dist',
-        }));
+        }, templateGlobals);
+
+        fs.writeFile(path.join(rootDir, 'index.html'), indexTemplate(props));
 
         return renderedApps;
     })
     .then(result => console.log('finished', result))
     .catch(err => console.error(err));
 
+
+
+//
 function loadTemplateGlobals(pathHash) {
     var keys = Object.keys(pathHash);
 

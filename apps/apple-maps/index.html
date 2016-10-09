@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test</title>
+    <style type="text/css">
+        img, canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="data">
+        <!-- data is picked up from the svg image, then used to create the icon image links -->
+        <img id="icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA2MCI+PGc+PGNpcmNsZSBjbGFzcz0icmluZyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiIGN4PSIzMCIgY3k9IjMwIiByPSIxOCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0icmluZyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjMiIGN4PSIzMCIgY3k9IjMwIiByPSIyNyI+PC9jaXJjbGU+PC9nPjwvc3ZnPg==" width="180" height="180" />
+    </div>
+    <canvas width="60" height="60"></canvas>
+
+    <script type="text/javascript">
+        var $head = document.head;
+        var $img = document.querySelector('img#icon'),
+            $canvas = document.querySelector('canvas');
+
+        var sizes = [
+            '60x60',
+            '76x76',
+            '120x120',
+            '152x152',
+            '180x180',
+        ];
+
+        window.onload = function() {
+            var $canvas = document.createElement("canvas");
+            var ctx = $canvas.getContext('2d'),
+                dataURL,
+                parsedSize,
+                width, height,
+                link;
+
+            sizes.forEach(function(sizeRaw) {
+                parsedSize = sizeRaw.split('x').map(Number);
+
+                width = parsedSize[0];
+                height = parsedSize[1];
+
+                $canvas.width = width;
+                $canvas.height = height;
+
+                ctx.fillStyle = '#FFF';
+                ctx.fillRect(0, 0, width, height);
+                ctx.drawImage($img, 0, 0);
+                dataURL = $canvas.toDataURL("image/png");
+
+                link = document.createElement('link');
+                link.setAttribute('rel', 'apple-touch-icon-precomposed');
+                link.setAttribute('sizes', sizeRaw);
+                link.setAttribute('href', dataURL);
+                $head.appendChild(link);
+            });
+        };
+
+        function getBase64FromImageUrl(url) {
+            var img = new Image();
+
+            img.setAttribute('crossOrigin', 'anonymous');
+
+            img.onload = function () {
+                var canvas = document.createElement("canvas");
+                canvas.width = this.width;
+                canvas.height = this.height;
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(this, 0, 0);
+
+                var dataURL = canvas.toDataURL("image/png");
+
+                alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+            };
+
+            img.src = url;
+        }
+    </script>
+</body>
+</html>

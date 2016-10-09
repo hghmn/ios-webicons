@@ -1,0 +1,20 @@
+{
+  "name": "ios-webicons",
+  "version": "1.0.0",
+  "description": "Custom icons for ios through webapp hackery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hghmn/ios-webicons.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hghmn/ios-webicons/issues"
+  },
+  "homepage": "https://github.com/hghmn/ios-webicons#readme"
+}
